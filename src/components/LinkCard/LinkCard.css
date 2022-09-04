@@ -1,0 +1,21 @@
+.linkcard {
+    margin: 0 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.linkcard:last-of-type {
+    margin: 0;
+}
+
+.linkcard__text {
+    margin: 0;
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: white;
+    text-align: center;
+}
