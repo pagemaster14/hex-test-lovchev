@@ -19,3 +19,12 @@
     color: white;
     text-align: center;
 }
+
+.linkcard__short {
+    cursor: pointer;
+    transition: opacity .3s ease 0.3s;
+}
+
+.linkcard__short:hover {
+    opacity: 0.6;
+}

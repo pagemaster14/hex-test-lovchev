@@ -11,6 +11,10 @@
     color: white;
 }
 
+.form__input_invalid {
+    border: medium dashed red;
+}
+
 .form__button {
     margin-top: 40px;
     align-self: center;
@@ -31,4 +35,29 @@
 
 .form__button:hover {
     opacity: 0.6;
+}
+
+.form__button_inactive {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+    cursor: default;
+  }
+
+.form__input-container {
+    position: relative;
+}
+
+.form__input-error {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: white;
+}
+
+.form__api-response {
+    padding-top: 20px;
+    color: white;
 }

@@ -5,7 +5,22 @@ import LinkCard from "../LinkCard/LinkCard";
 import { withRouter } from "react-router-dom";
 
 
-function Main() {
+function Main(props) {
+    const [linksToRender, setLinksToRender] = React.useState([]);
+
+    React.useEffect(() => {
+        if (props.links.length > 0) {
+            if (props.links.length > 5) {
+                setLinksToRender(props.links.slice(0, 5));
+            } else {
+                setLinksToRender(props.links);
+            }
+        }
+    }, [props.links]);
+
+    function handleMoreButtonClick() {
+        setLinksToRender((state) => props.links.slice(0, state.length + 5));
+    }
 
     return (
         <>
@@ -27,12 +42,16 @@ function Main() {
                     <h2 className="main__table-title">Количество переходов по короткой ссылке:</h2>
                 </div>
                 <div className="main__link-container">
-                   <LinkCard shortlink="123" link="https://75mil7-dot-kinozal-guru.appspot.com/browse.php?sid=FCi6x1OS&page=9" counter="5" />
-                   <LinkCard shortlink="123" link="https://75mil7-dot-kinozal-guru.appspot.com/browse.php?sid=FCi6x1OS&page=9" counter="5" /> 
-                   <LinkCard shortlink="123" link="https://75mil7-dot-kinozal-guru.appspot.com/browse.php?sid=FCi6x1OS&page=9" counter="5" /> 
-                   <LinkCard shortlink="123" link="https://75mil7-dot-kinozal-guru.appspot.com/browse.php?sid=FCi6x1OS&page=9" counter="5" /> 
+                    {linksToRender.map((link) => (
+                        <LinkCard
+                            key={link.id}
+                            shortlink={link.short}
+                            link={link.target}
+                            counter={link.counter}
+                        />
+                    ))}
                 </div>
-
+                <button className="main__button" onClick={handleMoreButtonClick}>Ещё больше ссылок</button>
             </main>
         </>
     );

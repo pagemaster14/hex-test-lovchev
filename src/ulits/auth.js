@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.lovchevmesto.students.nomoredomains.rocks";
+export const BASE_URL = "http://79.143.31.216";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -7,42 +7,28 @@ function checkResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export const register = (password, email) => {
-  return fetch(`${BASE_URL}/signup`, {
+export const register = (username, password) => {
+  return fetch(`${BASE_URL}/register?username=${username}&password=${password}`, {
     method: "POST",
-    credentials: 'include',
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ password, email }),
   }).then(checkResponse);
 };
 
-export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+export const authorize = (username, password) => {
+  return fetch(`${BASE_URL}/login`, {
     method: "POST",
-    credentials: 'include',
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: JSON.stringify({ email, password }),
+    body: 'username=' + encodeURIComponent(username) +
+    '&password=' + encodeURIComponent(password)  ,
   })
     .then(checkResponse)
     .then((data) => {
-      localStorage.setItem("jwt", data.token);
-      console.log(data);
+      localStorage.setItem("jwt", data.access_token);
+      console.log(data.access_token);
       return data;
     });
-};
-
-export const checkToken = () => {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: "GET",
-    credentials: 'include',
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => data);
 };

@@ -14,14 +14,15 @@ function Header(props) {
       </div>
       <div className="header__navigation">
         <Route exact path="/">
-        <Link to="/login" className="header__navigation-link">Авторизация</Link>
-        <Link to="/register" className="header__navigation-link">Регистрация</Link>
+          <button className="header__navigation-button" onClick={props.signOut}>Выйти</button>
+          <Link to="/login" className="header__navigation-link">Авторизация</Link>
+          <Link to="/register" className="header__navigation-link">Регистрация</Link>
         </Route>
         <Route exact path="/login">
-        <Link to="/register" className="header__navigation-link">Регистрация</Link>
+          <Link to="/register" className="header__navigation-link">Регистрация</Link>
         </Route>
         <Route exact path="/register">
-        <Link to="/login" className="header__navigation-link">Авторизация</Link>
+          <Link to="/login" className="header__navigation-link">Авторизация</Link>
         </Route>
       </div>
     </header>
