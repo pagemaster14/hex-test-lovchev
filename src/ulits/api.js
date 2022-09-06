@@ -18,11 +18,22 @@ export const getStatistics = () => {
     }).then(checkResponse);
 };
 
+export const squeeze = (link) => {
+    return fetch(`${BASE_URL}/squeeze?link=${link}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + jwt,
+
+        },
+    }).then(checkResponse);
+};
+
 export const redirect = (shortLink) => {
     return fetch(`${BASE_URL}/s/${shortLink}`, {
         mode: 'no-cors',
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "text/html;charset=utf-8",
         },
     }).then(checkResponse);
 };

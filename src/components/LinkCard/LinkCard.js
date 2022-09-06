@@ -7,12 +7,12 @@ function LinkCard(props) {
 
     function handleShortLinkClick(e) {
         api.redirect(e.target.textContent)
-        .catch(err => err)
+        .catch(err => err)   
     }
 
     return (
         <article className="linkcard">
-            <p className="linkcard__text linkcard__short" onClick={handleShortLinkClick} target="_blank">{props.shortlink}</p>
+            <p className="linkcard__text linkcard__short" onClick={handleShortLinkClick} >{props.shortlink}</p>
             <p className="linkcard__text">{props.link}</p>
             <p className="linkcard__text">{props.counter}</p>
         </article>

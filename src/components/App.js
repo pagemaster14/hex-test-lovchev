@@ -11,16 +11,25 @@ import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [loggedIn, setState] = React.useState(false);
-  const [links, addLink] = React.useState([]);
+  const [links, getLinks] = React.useState([]);
   const history = useHistory();
 
   React.useEffect(() => {
       api.getStatistics()
         .then((data) => {
-          addLink(data);
+          getLinks(data);
         })
         .catch(err => err)
   }, [loggedIn])
+
+  function handleLinkSubmit(data) {
+    api
+      .squeeze(data)
+      .then((newLink) => {
+        getLinks([newLink, ...links]);
+      })
+      .catch((err) => console.log(err));
+  }
 
   const [registerRequestStatus, setRegisterRequestStatus] = React.useState([]);
   function handleRegister({ username, password }) {
@@ -69,7 +78,7 @@ function App() {
     <div className="page">
       <Header signOut={signOut}/>
       <Switch>
-      <ProtectedRoute exact path="/" component={Main} links={links} />
+      <ProtectedRoute exact path="/" component={Main} links={links} handleSqueeze={handleLinkSubmit} />
       <Route path="/register">
         <Register handleRegister={handleRegister} requestStatus={registerRequestStatus}/>
       </Route>
